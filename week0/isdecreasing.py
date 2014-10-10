@@ -2,7 +2,9 @@
 #basically, it's a copy paste of is increasing task, but reverse sorting requires a new list revseq
 
 def is_decreasing(seq):
-    revseq = seq[:]
+    revseq = seq[:] 
+    #if you write revseq = seq - it will be only a refference 
+    #and changing one will change both
     revseq.sort()
     revseq.reverse()
     if len(seq) == 1:
