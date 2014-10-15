@@ -20,18 +20,20 @@ def is_int_palindrome(n):
             n = n // 10
             pass
         else:
-            print ("false!!!!!!!!!!!!!!!!!!\n")
+            # print ("false!!!!!!!!!!!!!!!!!!\n")
             return False
             break
-    print("true!!!!!!!!!!!!!!!!!!!!!\n")
+    # print("true!!!!!!!!!!!!!!!!!!!!!\n")
     return True
 
-is_int_palindrome(1234)
-is_int_palindrome(1234321)
-is_int_palindrome(12321)
-is_int_palindrome(1000000000001)
-is_int_palindrome(1000001000001)
-is_int_palindrome(1000010100001)
-is_int_palindrome(999)
-is_int_palindrome(9919)
-is_int_palindrome(99911199)
+if __name__ == '__main__':
+        
+    is_int_palindrome(1234)
+    is_int_palindrome(1234321)
+    is_int_palindrome(12321)
+    is_int_palindrome(1000000000001)
+    is_int_palindrome(1000001000001)
+    is_int_palindrome(1000010100001)
+    is_int_palindrome(999)
+    is_int_palindrome(9919)
+    is_int_palindrome(99911199)
