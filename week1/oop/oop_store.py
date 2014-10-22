@@ -1,9 +1,12 @@
 # OOP
+from copy import deepcopy
 
 
 class CashDesk:
     def __init__(self):
         self.money = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0}
+        self.bills = [100, 50, 20, 10, 5, 2, 1]
+        self.totalmoney = 0
 
     def take_money(self, money_taken):
         for i in money_taken:
@@ -11,19 +14,39 @@ class CashDesk:
         print(self.money)
 
     def total(self):
-        self.total = 0
+        self.totalmoney = 0
         for i in self.money:
-            self.total = self.total + self.money[i]*i
-        print(self.total)
-        return self.total
+            self.totalmoney = self.totalmoney + self.money[i]*i
+        print(self.totalmoney)
+        return self.totalmoney
 
     def can_withdraw_money(self, amount_of_money):
-        if self.total >= amount_of_money:
-            print("true")
-            return True
-        else:
-            print('false')
+        canwithdraw = deepcopy(self.money)
+        if self.total() < amount_of_money:
+            print("false")
             return False
+        else:
+            self.subtracted = 0
+            i = 0
+            originalamount = amount_of_money
+            while i < len(self.bills) and amount_of_money > 0:
+
+                #print("hmm", self.bills[i])
+                if canwithdraw[self.bills[i]] > 0 and amount_of_money >= self.bills[i]:
+                    canwithdraw[self.bills[i]] -= 1
+                    amount_of_money -= self.bills[i]
+                    self.subtracted += self.bills[i]
+                    continue
+                else:
+                    i += 1
+                    continue
+            if self.subtracted == originalamount:
+                print ("true")
+                return True
+            else:
+                print("false")
+                print(amount_of_money, self.subtracted, canwithdraw)
+                return False
 
 
 class Product:
@@ -88,30 +111,33 @@ class Store:
         return self.total
 
 
-my_cash_desk = CashDesk()
-my_cash_desk.take_money({100: 1, 20: 2})
-my_cash_desk.take_money({100: 1, 20: 1, 10: 2})
-my_cash_desk.total()
-my_cash_desk.can_withdraw_money(100)
-my_cash_desk.can_withdraw_money(1000)
+# my_cash_desk = CashDesk()
+# my_cash_desk.take_money({100: 10, 20: 2})
+# my_cash_desk.take_money({100: 1, 20: 1, 10: 2})
+# my_cash_desk.total()
+# my_cash_desk.can_withdraw_money(100)
+# my_cash_desk.can_withdraw_money(30)
+# my_cash_desk.can_withdraw_money(31)
+# my_cash_desk.can_withdraw_money(1020)
+# my_cash_desk.total()
 
-halva = Product("tahan halva", 10, 18)
-halva.profit()
+# halva = Product("tahan halva", 10, 18)
+# halva.profit()
 
-hackbook = Laptop("hackbook", 1200, 1340, 1000, 4)
-print(hackbook.stock_price)
-hackbook.profit()
-print(hackbook.name)
+# hackbook = Laptop("hackbook", 1200, 1340, 1000, 4)
+# print(hackbook.stock_price)
+# hackbook.profit()
+# print(hackbook.name)
 
-nexus3 = Smartphone("google nexus 3", 800, 900, 123, 456)
-nexus3.profit()
+# nexus3 = Smartphone("google nexus 3", 800, 900, 123, 456)
+# nexus3.profit()
 
-store = Store("laptop.bg")
-store.load_new_products(nexus3, 2)
-store.list_products()
-store.sell_products(nexus3)
-store.sell_products(nexus3)
-store.sell_products(nexus3)
-store.list_products()
-store.sell_products(hackbook)
-store.total_profit()
+# store = Store("laptop.bg")
+# store.load_new_products(nexus3, 2)
+# store.list_products()
+# store.sell_products(nexus3)
+# store.sell_products(nexus3)
+# store.sell_products(nexus3)
+# store.list_products()
+# store.sell_products(hackbook)
+# store.total_profit()
